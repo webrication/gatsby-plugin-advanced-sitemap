@@ -1,4 +1,10 @@
-# gatsby-plugin-advanced-sitemap
+# gatsby-plugin-webrication-advanced-sitemap
+
+This is a fork of gatsby-plugin-advanced-sitemap, with a few changes:
+- hide "Ghost" attribution line from XSL stylesheet.
+- trailing slash set to gatsby config default trailingSlash setting 
+
+#
 
 The default Gatsby sitemap plugin generates a simple blob of raw XML for all your pages. This **advanced sitemap plugin** adds more power and configuration, generating a single or multiple sitemaps with full XSL templates to make them neatly organised and human + machine readable, as well linking image resources to encourage media indexing.
 
@@ -16,7 +22,7 @@ _NOTE: This plugin only generates output in `production` mode! To test, run: `ga
 
 ## Install
 
-`npm install --save gatsby-plugin-advanced-sitemap`
+`npm install --save gatsby-plugin-webrication-advanced-sitemap`
 
 ## How to Use
 
@@ -29,7 +35,7 @@ siteMetadata: {
     siteUrl: `https://www.example.com`,
 },
 plugins: [
-    `gatsby-plugin-advanced-sitemap`
+    `gatsby-plugin-webrication-advanced-sitemap`
 ]
 ```
 
@@ -46,7 +52,7 @@ If you want to generate advanced, individually organised sitemaps based on your 
 
 plugins: [
     {
-        resolve: `gatsby-plugin-advanced-sitemap`,
+        resolve: `gatsby-plugin-webrication-advanced-sitemap`,
         options: {
              // 1 query for each data type
             query: `
