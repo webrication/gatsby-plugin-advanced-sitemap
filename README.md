@@ -1,8 +1,8 @@
-# gatsby-plugin-webrication-advanced-sitemap
+# gatsby-plugin-advanced-sitemap-webrication
 
-This is a fork of gatsby-plugin-advanced-sitemap, with a few changes:
-- hide "Ghost" attribution line from XSL stylesheet.
-- trailing slash set to gatsby config default trailingSlash setting 
+This is a fork of [gatsby-plugin-advanced-sitemap](https://github.com/tryghost/gatsby-plugin-advanced-sitemap) with a few changes:
+- "Ghost" attribution line is removed from XSL stylesheet.
+- trailing slash set to gatsby config's [trailingSlash](https://www.gatsbyjs.com/docs/reference/release-notes/v4.7/#trailingslash-option) option
 
 #
 
@@ -22,7 +22,7 @@ _NOTE: This plugin only generates output in `production` mode! To test, run: `ga
 
 ## Install
 
-`npm install --save gatsby-plugin-webrication-advanced-sitemap`
+`npm install --save gatsby-plugin-advanced-sitemap-webrication`
 
 ## How to Use
 
@@ -35,7 +35,7 @@ siteMetadata: {
     siteUrl: `https://www.example.com`,
 },
 plugins: [
-    `gatsby-plugin-webrication-advanced-sitemap`
+    `gatsby-plugin-advanced-sitemap-webrication`
 ]
 ```
 
@@ -52,7 +52,7 @@ If you want to generate advanced, individually organised sitemaps based on your 
 
 plugins: [
     {
-        resolve: `gatsby-plugin-webrication-advanced-sitemap`,
+        resolve: `gatsby-plugin-advanced-sitemap-webrication`,
         options: {
              // 1 query for each data type
             query: `

@@ -1,7 +1,7 @@
 {
-  "name": "gatsby-plugin-webrication-advanced-sitemap",
+  "name": "gatsby-plugin-advanced-sitemap-webrication",
   "description": "Advanced plugin for generating configurable XML sitemaps with linked media for better SEO and human-readable XSL templates.",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "license": "MIT",
   "author": "Webrication",
   "homepage": "https://github.com/webrication/gatsby-plugin-advanced-sitemap",
