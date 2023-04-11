@@ -1,24 +1,23 @@
 # gatsby-plugin-advanced-sitemap-webrication
 
 This is a fork of [gatsby-plugin-advanced-sitemap](https://github.com/tryghost/gatsby-plugin-advanced-sitemap) with a few changes:
-- "Ghost" attribution line is removed from XSL stylesheet.
-- trailing slash set to gatsby config's [trailingSlash](https://www.gatsbyjs.com/docs/reference/release-notes/v4.7/#trailingslash-option) option
+
+-   "Ghost" attribution line is removed from XSL stylesheet.
+-   trailing slash set to gatsby config's [trailingSlash](https://www.gatsbyjs.com/docs/reference/release-notes/v4.7/#trailingslash-option) option
 
 #
 
 The default Gatsby sitemap plugin generates a simple blob of raw XML for all your pages. This **advanced sitemap plugin** adds more power and configuration, generating a single or multiple sitemaps with full XSL templates to make them neatly organised and human + machine readable, as well linking image resources to encourage media indexing.
 
-**Demo:** https://gatsby.ghost.org/sitemap.xml
-
+**Demo:** https://www.teenyfy.com/sitemap.xml
 
 &nbsp;
 
-![example](https://user-images.githubusercontent.com/120485/53555088-d27a0280-3b73-11e9-88ca-fb4ec08d9d26.png)
+![example](https://teenyfy-assets.s3.amazonaws.com/screenshots/sitemap-screenshot-3.png)
 
 _NOTE: This plugin only generates output in `production` mode! To test, run: `gatsby build && gatsby serve`_
 
 &nbsp;
-
 
 ## Install
 
@@ -43,7 +42,7 @@ plugins: [
 
 ## Options
 
-If you want to generate advanced, individually organised sitemaps based on your data, you can do so by passing in a query and config. The example below uses [Ghost](https://ghost.org/), but this should work with any data source - including Pages, Markdown, Contentful, etc.
+If you want to generate advanced, individually organised sitemaps based on your data, you can do so by passing in a query and config. The example below uses Strapi, but this should work with any data source - including Pages, Markdown, Contentful, etc.
 
 **Example:**
 
@@ -57,44 +56,14 @@ plugins: [
              // 1 query for each data type
             query: `
             {
-                allGhostPost {
-                    edges {
-                        node {
-                            id
-                            slug
-                            updated_at
-                            feature_image
-                        }
-                    }
+              allStrapiBlogPage {
+                edges {
+                  node {
+                    id
+                    slug
+                  }
                 }
-                allGhostPage {
-                    edges {
-                        node {
-                            id
-                            slug
-                            updated_at
-                            feature_image
-                        }
-                    }
-                }
-                allGhostTag {
-                    edges {
-                        node {
-                            id
-                            slug
-                            feature_image
-                        }
-                    }
-                }
-                allGhostAuthor {
-                    edges {
-                        node {
-                            id
-                            slug
-                            profile_image
-                        }
-                    }
-                }
+              }
             }`,
             // The filepath and name to Index Sitemap. Defaults to '/sitemap.xml'.
             output: "/custom-sitemap.xml",
@@ -102,26 +71,23 @@ plugins: [
                 // Each data type can be mapped to a predefined sitemap
                 // Routes can be grouped in one of: posts, tags, authors, pages, or a custom name
                 // The default sitemap - if none is passed - will be pages
-                allGhostPost: {
-                    sitemap: `posts`,
+                allStrapiBlogPage: {
+                    sitemap: `blog`,
                     // Add a query level prefix to slugs, Don't get confused with global path prefix from Gatsby
                     // This will add a prefix to this particular sitemap only
                     prefix: 'your-prefix/',
-                    // Custom Serializer 
+                    // Custom Serializer
                     serializer: (edges) => {
-                        return edges.map(({ node }) => {
-                            (...) // Custom logic to change final sitemap.
-                        })
-                    }
-                },
-                allGhostTag: {
-                    sitemap: `tags`,
-                },
-                allGhostAuthor: {
-                    sitemap: `authors`,
-                },
-                allGhostPage: {
-                    sitemap: `pages`,
+                      const siteMapEntries = [];
+                      edges.forEach((edge) => {
+                        // Custom logic to change final sitemap.
+                        if (!edge.node.slug.endsWith("/")) {
+                          edge.node.slug = edge.node.slug + "/";
+                        }
+                        siteMapEntries.push(edge);
+                      });
+                      return siteMapEntries;
+                    },
                 },
             },
             exclude: [
@@ -148,11 +114,11 @@ plugins: [
 ]
 ```
 
-Example output of ☝️ this exact config 👉 https://gatsby.ghost.org/sitemap.xml
+Example output of ☝️ this exact config 👉 https://www.teenyfy.com/sitemap.xml
 
 ## Develop Plugin
 
-- Pull the repo
+-   Pull the repo
 
 1. Install dependencies
 
